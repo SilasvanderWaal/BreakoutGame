@@ -9,15 +9,15 @@ public class BoxList {
 	
 	public BoxList() {
 		boxlist = new ArrayList<Box>();
-		for(int i = 0; i < 20 ; i++) {
-			Box box = new Box(0 + ((i % 5) * 100), (i % 5) * 100, 100, 20, Color.red);
+		for(int i = 0; i < 35 ; i++) {
+			Box box = new Box(12 + ((int)(i / 5) * 112), 20 + (i % 5) * 50, 100, 15, Color.red);
 			boxlist.add(box);
 		}
 	}
 	
 	public void draw(Graphics2D graphics) {
-		for(int i = 0; i < 20; i++ ) {
-			boxlist.get(i).draw(graphics);
+		for(Box box : boxlist) {
+			box.draw(graphics);
 		}
 	}	
 }
