@@ -13,36 +13,25 @@ public class Bat extends Sprite{
 		return new Rectangle(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 	}
 	
-	@Override
-	public void update(Keyboard keyboard) {
-		if(this.getX() > 0 && this.getX() < 700) {
-			if(keyboard.isKeyDown(Key.Left)) {
-				setX(getX() - 3);
-				if(keyboard.isKeyDown(Key.Left) && keyboard.isKeyDown(Key.Space)){
-					setX(getX() - 5);
-				}
-			}
-		
-			if(keyboard.isKeyDown(Key.Right)) {
-				setX(getX() + 3);
-				if(keyboard.isKeyDown(Key.Right) && keyboard.isKeyDown(Key.Space)){
-					setX(getX() + 5);
-				}
-			}
-		}else {
-			if(this.getX() <= 0) {
-				setX(getX() + 1);
-			}
-			
-			if(this.getX() >= 700){
-				setX(getX() - 1);
-			}
+	public void move(Keyboard keyboard) {
+		if(keyboard.isKeyDown(Key.Left)) {
+			setX(getX() - 5);
+		}
+	
+		if(keyboard.isKeyDown(Key.Right)) {
+			setX(getX() + 5);
 		}
 	}
 	
 	@Override
+	public void update(Keyboard keyboard) {
+		
+	}
+		
+	
+	@Override
 	public void draw(Graphics2D graphics) {
-		graphics.setColor(Color.cyan);
+		graphics.setColor(Color.blue);
 		graphics.fillRect(getX(), getY(), getWidth(), getHeight());
 	}
 }
