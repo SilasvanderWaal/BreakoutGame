@@ -15,11 +15,11 @@ public class Bat extends Sprite{
 	
 	public void move(Keyboard keyboard) {
 		if(keyboard.isKeyDown(Key.Left)) {
-			setX(getX() - 5);
+			setX(getX() - 7);
 		}
 	
 		if(keyboard.isKeyDown(Key.Right)) {
-			setX(getX() + 5);
+			setX(getX() + 7);
 		}
 	}
 	

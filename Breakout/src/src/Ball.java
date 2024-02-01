@@ -6,8 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 public class Ball extends Sprite{
-	private int xSpeed = -3;
-	private int ySpeed = -5;
+	private int xSpeed = -(3 + (int)(Math.random()) *3);
+	private int ySpeed = -6;
 
 	public Ball(int x, int y, int width, int height) {
 		super(x, y, width, height);
@@ -21,16 +21,24 @@ public class Ball extends Sprite{
 		ySpeed *= -1;
 	}
 	
-	public void playerCollision() {
+	public void batCollision(Bat bat) {
 		ySpeed *= -1;
+		this.setY(bat.getY() - bat.getHeight());
 	}
 	
-	public void batCollision() {
+	public void boxCollision(Box box) {
+		
 		ySpeed *= -1;
-	}
-	
-	public void boxCollision() {
-		ySpeed *= -1;
+		
+		if(ySpeed < 20 && ySpeed > -20) {
+			if(ySpeed < 0) {
+				ySpeed--;
+			}else{
+				ySpeed++;
+			}
+		}
+		
+		this.setY(box.getY() + box.getHeight());
 	}
 	
 	@Override

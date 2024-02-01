@@ -28,9 +28,7 @@ public class Game {
 		borders.add(new Border(Const.WINDOWWIDTH - Const.BORDERWIDTH, 0, Const.BORDERWIDTH, Const.WINDOWHEIGHT));
 		
 		boxcollection = new BoxCollection();
-		
-		box = new Box(0, 2 * Const.BOXHEIGHT +  4 * Const.BOXGAPY, Const.WINDOWWIDTH, 10, Color.PINK);
-	}
+		}
 	
 
 	public void update(Keyboard keyboard) {
@@ -55,14 +53,39 @@ public class Game {
 		}
 		//Ball collision with bat
 		else if(ball.Collision(bat)) {
-			ball.batCollision();
+			ball.batCollision(bat);
 		}
 		
 		//Ball collision with box on row1
+		for(int i = 0; i < boxcollection.getRow1().size(); i++) {
+			if(boxcollection.getRow1().get(i).Collision(ball)) {
+				ball.boxCollision(boxcollection.getRow1().get(i));
+				
+				if(boxcollection.getRow1().get(i).isKilled()) {
+				boxcollection.getRow1().remove(i);
+				}
+			}
+		}
+		
+		//Checking collision for boxes on row2
+		for(int i = 0; i < boxcollection.getRow2().size(); i++) {
+			if(boxcollection.getRow2().get(i).Collision(ball)) {
+				ball.boxCollision(boxcollection.getRow2().get(i));
+				
+				if(boxcollection.getRow2().get(i).isKilled()) {
+				boxcollection.getRow2().remove(i);
+				}
+			}
+		}
+		
+		//Checking collision for boxes on row3
 		for(int i = 0; i < boxcollection.getRow3().size(); i++) {
 			if(boxcollection.getRow3().get(i).Collision(ball)) {
-				ball.boxCollision();
+				ball.boxCollision(boxcollection.getRow3().get(i));
+				
+				if(boxcollection.getRow3().get(i).isKilled()) {
 				boxcollection.getRow3().remove(i);
+				}
 			}
 		}
 		
@@ -77,10 +100,6 @@ public class Game {
 		
 		for(Border b : borders) {
 			b.draw(graphics);
-		}
-		
-		// box.draw(graphics);
-		
-		
+		}	
 	}
 }

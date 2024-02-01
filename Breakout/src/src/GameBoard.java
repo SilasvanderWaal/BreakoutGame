@@ -21,11 +21,11 @@ public class GameBoard extends JComponent {
 
 	@Override
 	protected void paintComponent(Graphics arg0) {
+		Toolkit.getDefaultToolkit().sync();
 		super.paintComponent(arg0);
 		Graphics2D graphics = (Graphics2D)arg0;
 		graphics.setColor(Color.black);
 		graphics.fillRect(0, 0, getWidth(), getHeight());
-		
 		game.draw(graphics);
 	}
 	

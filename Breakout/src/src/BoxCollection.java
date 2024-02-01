@@ -3,6 +3,7 @@ package src;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class BoxCollection {
 	
@@ -16,14 +17,14 @@ public class BoxCollection {
 		row3 = new ArrayList<Box>();
 
 		for(int i = 0; i < Const.BOXESEACHROW; i++) {
-			row1.add(new Box(i *( Const.BOXWIDTH + Const.BOXGAPX) + Const.BORDERWIDTH + Const.BOXGAPX, Const.BORDERWIDTH + Const.BOXGAPY, (Const.WINDOWWIDTH - ((Const.BOXESEACHROW + 1) * Const.BOXGAPX)) / Const.BOXESEACHROW, Const.BOXHEIGHT, Color.red));
-			row2.add(new Box(i *( Const.BOXWIDTH + Const.BOXGAPX) + Const.BORDERWIDTH + Const.BOXGAPX, Const.BORDERWIDTH + Const.BOXHEIGHT +  2 * Const.BOXGAPY, (Const.WINDOWWIDTH - ((Const.BOXESEACHROW + 1) * Const.BOXGAPX)) / Const.BOXESEACHROW, Const.BOXHEIGHT, Color.blue));
-			row3.add(new Box(i *( Const.BOXWIDTH + Const.BOXGAPX) + Const.BORDERWIDTH + Const.BOXGAPX,  2 * Const.BOXHEIGHT +  4 * Const.BOXGAPY, (Const.WINDOWWIDTH - ((Const.BOXESEACHROW + 1) * Const.BOXGAPX)) / Const.BOXESEACHROW, Const.BOXHEIGHT, Color.yellow));
+			row1.add(new Box(i *( Const.BOXWIDTH + Const.BOXGAPX) + Const.BORDERWIDTH + Const.BOXGAPX, Const.BORDERWIDTH + Const.BOXGAPY, (Const.WINDOWWIDTH - ((Const.BOXESEACHROW + 1) * Const.BOXGAPX)) / Const.BOXESEACHROW, Const.BOXHEIGHT, 1));
+			row2.add(new Box(i *( Const.BOXWIDTH + Const.BOXGAPX) + Const.BORDERWIDTH + Const.BOXGAPX, Const.BORDERWIDTH + Const.BOXHEIGHT +  2 * Const.BOXGAPY, (Const.WINDOWWIDTH - ((Const.BOXESEACHROW + 1) * Const.BOXGAPX)) / Const.BOXESEACHROW, Const.BOXHEIGHT, 2));
+			row3.add(new Box(i *( Const.BOXWIDTH + Const.BOXGAPX) + Const.BORDERWIDTH + Const.BOXGAPX,  2 * Const.BOXHEIGHT +  4 * Const.BOXGAPY, (Const.WINDOWWIDTH - ((Const.BOXESEACHROW + 1) * Const.BOXGAPX)) / Const.BOXESEACHROW, Const.BOXHEIGHT, 3));
 		}
 	}
 	
 	public void update(Keyboard keyboard) {
-		
+
 	}
 	
 	public void draw(Graphics2D graphics) {
