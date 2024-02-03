@@ -25,7 +25,11 @@ public class Bat extends Sprite{
 	
 	@Override
 	public void update(Keyboard keyboard) {
-		
+		if(keyboard.isKeyDown(Key.Up)) {
+			this.setWidth(Const.WINDOWWIDTH);
+		}else {
+			this.setWidth(Const.PLAYERWIDTH);
+		}
 	}
 		
 	

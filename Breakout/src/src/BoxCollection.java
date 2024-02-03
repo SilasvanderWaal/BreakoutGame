@@ -1,9 +1,7 @@
 package src;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class BoxCollection {
 	

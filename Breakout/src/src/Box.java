@@ -2,7 +2,6 @@ package src;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 
 public class Box extends Sprite{
 	private Color color;
