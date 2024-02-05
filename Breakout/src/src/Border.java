@@ -11,7 +11,7 @@ public class Border extends Sprite{
 
 	@Override
 	public void update(Keyboard keyboard) {
-		
+
 	}
 
 	@Override
@@ -19,5 +19,5 @@ public class Border extends Sprite{
 		graphics.setColor(Color.green);
 		graphics.fillRect(getX(), getY(), getWidth(), getHeight());
 	}
-	
+
 }

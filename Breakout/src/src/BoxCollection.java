@@ -4,11 +4,11 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 public class BoxCollection {
-	
+
 	private ArrayList<Box> row1;
 	private ArrayList<Box> row2;
 	private ArrayList<Box> row3;
-	
+
 	public BoxCollection() {
 		row1 = new ArrayList<Box>();
 		row2 = new ArrayList<Box>();
@@ -20,22 +20,22 @@ public class BoxCollection {
 			row3.add(new Box(i *( Const.BOXWIDTH + Const.BOXGAPX) + Const.BORDERWIDTH + Const.BOXGAPX,  2 * Const.BOXHEIGHT +  4 * Const.BOXGAPY, (Const.WINDOWWIDTH - ((Const.BOXESEACHROW + 1) * Const.BOXGAPX)) / Const.BOXESEACHROW, Const.BOXHEIGHT, 3));
 		}
 	}
-	
+
 	public void update(Keyboard keyboard) {
 
 	}
-	
+
 	public void draw(Graphics2D graphics) {
 		//Displaying the boxes on row1
 		for(int i = 0; i < row1.size(); i++) {
 			row1.get(i).draw(graphics);
 		}
-		
+
 		//Displaying the boxes on row2
 		for(int i = 0; i < row2.size(); i++) {
 			row2.get(i).draw(graphics);
 		}
-		
+
 		//Displaying the boxes on row3
 		for(int i = 0; i < row3.size(); i++) {
 			row3.get(i).draw(graphics);
@@ -65,6 +65,6 @@ public class BoxCollection {
 	public void setRow3(ArrayList<Box> row3) {
 		this.row3 = row3;
 	}
-	
-	
+
+
 }

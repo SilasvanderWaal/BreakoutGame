@@ -2,18 +2,17 @@ package src;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 import javax.swing.JComponent;
 
 public class GameBoard extends JComponent {
-	private final int FPS = 40; 
+	private final int FPS = 60; 
 	private Game game;
 	private Keyboard keyboard;
 	public GameBoard() {
 		keyboard = new Keyboard();
 		game = new Game(this);
 	}
-	
+
 	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(800, 600);
@@ -28,7 +27,7 @@ public class GameBoard extends JComponent {
 		graphics.fillRect(0, 0, getWidth(), getHeight());
 		game.draw(graphics);
 	}
-	
+
 	@Override
 	protected void processKeyEvent(KeyEvent e) {
 		super.processKeyEvent(e);

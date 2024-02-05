@@ -1,12 +1,9 @@
 package src;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
+
 import java.awt.TextArea;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
+
 
 import javax.swing.*;
 

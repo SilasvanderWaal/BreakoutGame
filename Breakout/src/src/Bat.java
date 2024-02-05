@@ -1,14 +1,12 @@
 package src;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.*;
 
 public class Bat extends Sprite{
 	public Bat(int x, int y, int width, int height) {
 		super(x, y, width, height);
 	}
-	
+
 	//Move the bat sideways, keys + space = boost
 	public void move(Keyboard keyboard) {
 		if(keyboard.isKeyDown(Key.Left)) {
@@ -17,7 +15,7 @@ public class Bat extends Sprite{
 				setX(getX() - Const.PLAYERBOOSTSPEED);
 			}
 		}
-	
+
 		if(keyboard.isKeyDown(Key.Right)) {
 			setX(getX() + Const.PLAYERBASESPEED);
 			if(keyboard.isKeyDown(Key.Space)) {
@@ -25,7 +23,7 @@ public class Bat extends Sprite{
 			}
 		}
 	}
-	
+
 	@Override
 	public void update(Keyboard keyboard) {
 		if(keyboard.isKeyDown(Key.Up)) {
@@ -34,8 +32,8 @@ public class Bat extends Sprite{
 			this.setWidth(Const.PLAYERWIDTH);
 		}
 	}
-		
-	
+
+
 	@Override
 	public void draw(Graphics2D graphics) {
 		graphics.setColor(Color.blue);
