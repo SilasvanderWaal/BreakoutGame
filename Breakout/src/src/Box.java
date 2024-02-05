@@ -12,16 +12,13 @@ public class Box extends Sprite{
 		this.lives = lives;
 	}
 	
-	
-	
 	@Override
 	public void update(Keyboard keyboard) {
 	}
 	
 	@Override 
 	public void draw(Graphics2D graphics) {
-		
-		//Set the right color after the lives of  the box
+		//Set the right color after the lives of he box
 		switch (lives) {
 		case 1:
 			this.color = Color.red;
@@ -32,7 +29,6 @@ public class Box extends Sprite{
 		case 3:
 			this.color = Color.green;
 			break;
-
 		default:
 			break;
 		}

@@ -26,15 +26,17 @@ public class BoxCollection {
 	}
 	
 	public void draw(Graphics2D graphics) {
-		//Displaying the boxes
+		//Displaying the boxes on row1
 		for(int i = 0; i < row1.size(); i++) {
 			row1.get(i).draw(graphics);
 		}
 		
+		//Displaying the boxes on row2
 		for(int i = 0; i < row2.size(); i++) {
 			row2.get(i).draw(graphics);
 		}
 		
+		//Displaying the boxes on row3
 		for(int i = 0; i < row3.size(); i++) {
 			row3.get(i).draw(graphics);
 		}

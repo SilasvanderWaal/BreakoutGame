@@ -1,7 +1,12 @@
 package src;
 
+import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.TextArea;
 import java.util.*;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class Game {
 	private ArrayList<Ball> balls;
@@ -11,6 +16,9 @@ public class Game {
 	
 	private int batOldX;
 	public Box box;
+	
+	private int lives = Const.STARTLIVES;
+	private int score = 0;
 
 
 	public Game(GameBoard board) {
@@ -65,53 +73,111 @@ public class Game {
 			
 			//Ball collision with box on row1
 			for(int i = 0; i < boxcollection.getRow1().size(); i++) {
-				if(boxcollection.getRow1().get(i).Collision(ball)) {
-					ball.boxCollision(boxcollection.getRow1().get(i));
+				ArrayList<Box> row1 = boxcollection.getRow1();
+				
+				if(row1.get(i).Collision(ball)) {
+					ball.boxCollision(row1.get(i));
 					
-					if(boxcollection.getRow1().get(i).isKilled()) {
-					boxcollection.getRow1().remove(i);
-					balls.add(new Ball(Const.BALLSTARTPOSITIONX, Const.BALLSTARTPOSITIONY, Const.BALLWIDTH, Const.BALLHEIGHT));
+					if(row1.get(i).isKilled()) {
+					row1.remove(i);
+					score++;
+					}
+					
+					if(row1.isEmpty()) {
+						score += Const.BIGSCORE;
+						
+						//For future game mechanics
+						//balls.add(new Ball(Const.BALLSTARTPOSITIONX, Const.BALLSTARTPOSITIONY, Const.BALLWIDTH, Const.BALLHEIGHT));
 					}
 				}
 			}
 			
 			//Ball collision for boxes on row2
 			for(int i = 0; i < boxcollection.getRow2().size(); i++) {
-				if(boxcollection.getRow2().get(i).Collision(ball)) {
-					ball.boxCollision(boxcollection.getRow2().get(i));
+				ArrayList<Box> row2 = boxcollection.getRow2();
+
+				if(row2.get(i).Collision(ball)) {
+					ball.boxCollision(row2.get(i));
 					
-					if(boxcollection.getRow2().get(i).isKilled()) {
-					boxcollection.getRow2().remove(i);
-					balls.add(new Ball(Const.BALLSTARTPOSITIONX, Const.BALLSTARTPOSITIONY, Const.BALLWIDTH, Const.BALLHEIGHT));
+					if(row2.get(i).isKilled()) {
+						row2.remove(i);
+						score++;
+					}
+					
+					if(row2.isEmpty()) {
+						score += Const.BIGSCORE;
+						
+						//For future game mechanics
+						//balls.add(new Ball(Const.BALLSTARTPOSITIONX, Const.BALLSTARTPOSITIONY, Const.BALLWIDTH, Const.BALLHEIGHT));
 					}
 				}
 			}
 			
 			//Ball collision for boxes on row3
 			for(int i = 0; i < boxcollection.getRow3().size(); i++) {
-				if(boxcollection.getRow3().get(i).Collision(ball)) {
-					ball.boxCollision(boxcollection.getRow3().get(i));
+				ArrayList<Box> row3 = boxcollection.getRow3();
+
+				if(row3.get(i).Collision(ball)) {
+					ball.boxCollision(row3.get(i));
 					
-					if(boxcollection.getRow3().get(i).isKilled()) {
-					boxcollection.getRow3().remove(i);
-					balls.add(new Ball(Const.BALLSTARTPOSITIONX, Const.BALLSTARTPOSITIONY, Const.BALLWIDTH, Const.BALLHEIGHT));
+					if(row3.get(i).isKilled()) {
+						row3.remove(i);
+						score++;
 					}
+					
+					if(row3.isEmpty()) {
+						score += Const.BIGSCORE;
+						
+						//For future game mechanics
+						//balls.add(new Ball(Const.BALLSTARTPOSITIONX, Const.BALLSTARTPOSITIONY, Const.BALLWIDTH, Const.BALLHEIGHT));
+					}
+				}
+			}
+			
+			//Checking if a entire row is deleted
+			if(boxcollection.getRow1().isEmpty() && boxcollection.getRow2().isEmpty() && boxcollection.getRow3().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "You won! Score: " + score);
+				System.exit(0);
+				
+				//For future mechanics 
+				
+			}
+			
+			//Looping over the balls and checking if they are out of the gamefield
+			for(Ball b : balls) {
+				if(b.ballOut()) {
+					lives--;
+				}
+				
+				//Display game over if there are no lives left
+				if(lives == 0 ) {
+					JOptionPane.showMessageDialog(null, "Game over! Score: " + score);
+					System.exit(0);
 				}
 			}
 		}
 	}
 
 	public void draw(Graphics2D graphics) {
+		//Display all the balls
 		for(Ball b : balls) {
 			b.draw(graphics);
 		}
 		
+		//Display the player
 		bat.draw(graphics);
 		
+		//Display all the boxes
 		boxcollection.draw(graphics);
 		
+		//Display the borders
 		for(Border b : borders) {
 			b.draw(graphics);
 		}	
+		
+		//Display the lives scoreboard
+		graphics.setFont(new Font("livesFont", Font.ITALIC, Const.FONTSIZE));
+		graphics.drawString("Lives: " + Integer.toString(lives) , Const.WINDOWWIDTH / 4, Const.WINDOWHEIGHT);
+		graphics.drawString("Score: "+ Integer.toString(score), 3 * (Const.WINDOWWIDTH / 4), Const.WINDOWHEIGHT);
 	}
 }

@@ -9,17 +9,20 @@ public class Bat extends Sprite{
 		super(x, y, width, height);
 	}
 	
-	public Rectangle getBounds() {
-		return new Rectangle(this.getX(), this.getY(), this.getWidth(), this.getHeight());
-	}
-	
+	//Move the bat sideways, keys + space = boost
 	public void move(Keyboard keyboard) {
 		if(keyboard.isKeyDown(Key.Left)) {
-			setX(getX() - 7);
+			setX(getX() -Const.PLAYERBASESPEED);
+			if(keyboard.isKeyDown(Key.Space)) {
+				setX(getX() - Const.PLAYERBOOSTSPEED);
+			}
 		}
 	
 		if(keyboard.isKeyDown(Key.Right)) {
-			setX(getX() + 7);
+			setX(getX() + Const.PLAYERBASESPEED);
+			if(keyboard.isKeyDown(Key.Space)) {
+				setX(getX() + Const.PLAYERBOOSTSPEED);
+			}
 		}
 	}
 	
@@ -37,5 +40,7 @@ public class Bat extends Sprite{
 	public void draw(Graphics2D graphics) {
 		graphics.setColor(Color.blue);
 		graphics.fillRect(getX(), getY(), getWidth(), getHeight());
+		graphics.setColor(Color.red);
+		graphics.drawString("SvdW", getX() + (Const.PLAYERWIDTH/2), getY() + Const.PLAYERHEIGHT);
 	}
 }

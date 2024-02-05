@@ -2,20 +2,28 @@ package src;
 
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 public class Ball extends Sprite{
-	private int xSpeed = (-5 + (int)(Math.random() *10));
-	private int ySpeed = -5;
+	private int xSpeed;
+	private int ySpeed;
 	
 	private int oldX;
-	private int oldY;
-	
 	private int newX;
-	private int newY;
-
+	
 	public Ball(int x, int y, int width, int height) {
 		super(x, y, width, height);
+		ySpeed = Const.BALLSTARTSPEED;
+		
+		xSpeed = (int)(Math.random()*4) + 2;
+		if(Math.random() < 0.5) {
+			xSpeed *= -1;
+		}
 	}
 	
 	public void sideBorderCollsion(Border b) {
@@ -64,7 +72,7 @@ public class Ball extends Sprite{
 			if(ySpeed < 0)
 				this.setY(box.getY() + box.getHeight());
 			else
-				this.setY(box.getY() + this.getHeight());
+				this.setY(box.getY() - this.getHeight());
 			
 			//Reverse the Y direction
 			ySpeed *= -1;
@@ -79,7 +87,7 @@ public class Ball extends Sprite{
 		}
 		
 		//Increase the speed
-		if(ySpeed < 20 && ySpeed > -20) {
+		if(ySpeed < Const.BALLMAXSPEED && ySpeed > -Const.BALLMAXSPEED) {
 			if(ySpeed < 0) {
 				ySpeed--;
 			}else{
@@ -87,13 +95,25 @@ public class Ball extends Sprite{
 			}
 		}
 	}
+
 	
 	@Override
 	public void update(Keyboard keyboard){
 		oldX = this.getX();
-		oldY = this.getY();
+		
 		setY(getY() + ySpeed);
 		setX(getX() + xSpeed);
+	}
+	
+	public boolean ballOut() {
+		if( this.getY() > Const.WINDOWHEIGHT) {
+			this.setX(Const.BALLSTARTPOSITIONX);
+			this.setY(Const.BALLSTARTPOSITIONY);
+			this.ySpeed = Const.BALLSTARTSPEED;
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	@Override 
