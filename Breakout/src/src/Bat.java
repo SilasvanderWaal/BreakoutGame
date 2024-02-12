@@ -26,11 +26,7 @@ public class Bat extends Sprite{
 
 	@Override
 	public void update(Keyboard keyboard) {
-		if(keyboard.isKeyDown(Key.Up)) {
-			this.setWidth(Const.WINDOWWIDTH);
-		}else {
-			this.setWidth(Const.PLAYERWIDTH);
-		}
+
 	}
 
 
@@ -39,6 +35,6 @@ public class Bat extends Sprite{
 		graphics.setColor(Color.blue);
 		graphics.fillRect(getX(), getY(), getWidth(), getHeight());
 		graphics.setColor(Color.red);
-		graphics.drawString("SvdW", getX() + (Const.PLAYERWIDTH/2), getY() + Const.PLAYERHEIGHT);
+		graphics.drawString("SvdW", getX() + (this.getWidth()/2), getY() + this.getHeight());
 	}
 }

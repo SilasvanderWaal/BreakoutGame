@@ -13,12 +13,13 @@ public class Ball extends Sprite{
 	public Ball(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		//Sets the default speed, random random angle
-		ySpeed = Const.BALLSTARTSPEED;
+		ySpeed = -Const.BALLSTARTSPEED;
 		xSpeed = (int)(Math.random()*4) + 2;
 		if(Math.random() < 0.5) {
 			xSpeed *= -1;
 		}
 	}
+
 
 	//Changes the ball direction on a collision with a side border
 	public void sideBorderCollsion(Border b) {
@@ -64,6 +65,7 @@ public class Ball extends Sprite{
 	
 	//Changes the ball direction on a collision with a box, also detects side collisions
 	public void boxCollision(Box box) {
+		
 		newX = this.getX();
 		//Replace the ball to the previous X coordinate, keep the Y.
 		interpoltate(xSpeed);
@@ -108,9 +110,6 @@ public class Ball extends Sprite{
 	//Checks if the ball is out of the game field
 	public boolean ballOut() {
 		if( this.getY() > Const.WINDOWHEIGHT) {
-			this.setX(Const.BALLSTARTPOSITIONX);
-			this.setY(Const.BALLSTARTPOSITIONY);
-			this.ySpeed = Const.BALLSTARTSPEED;
 			return true;
 		}else {
 			return false;

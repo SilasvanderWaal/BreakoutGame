@@ -16,6 +16,8 @@ public class Game {
 
 	private int lives = Const.STARTLIVES;
 	private int score = 0;
+	
+	private powerUps powerups;
 
 
 	public Game(GameBoard board) {
@@ -38,8 +40,12 @@ public class Game {
 		//Creates a collection with all the bricks
 		boxcollection = new BoxCollection();
 		
+				
+		powerups = new powerUps(balls, bat);
+		
 		//Creates the collision detection system
-		collisiondetection = new CollisionDetection(balls, boxcollection, bat, this, borders);
+		collisiondetection = new CollisionDetection(balls, boxcollection, bat, this, borders, powerups);
+
 	}
 
 
@@ -60,6 +66,8 @@ public class Game {
 			JOptionPane.showMessageDialog(null, "Game over! Score: " + score);
 			System.exit(0);
 		}
+		
+		powerups.update(keyboard);
 	}
 
 	public void draw(Graphics2D graphics) {
@@ -85,6 +93,8 @@ public class Game {
 		
 		//Display the player score
 		graphics.drawString("Score: "+ Integer.toString(score), 2 * (Const.WINDOWWIDTH / 4), Const.WINDOWHEIGHT);
+		
+		powerups.draw(graphics);
 	}
 
 

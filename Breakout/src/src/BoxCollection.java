@@ -22,7 +22,7 @@ public class BoxCollection {
 	}
 
 	public void update(Keyboard keyboard) {
-
+		
 	}
 
 	public void draw(Graphics2D graphics) {

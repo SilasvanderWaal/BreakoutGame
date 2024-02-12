@@ -18,7 +18,7 @@ public class Const {
 	public static final int BALLHEIGHT = 20;
 	public static final int BALLSTARTPOSITIONX = 400;
 	public static final int BALLSTARTPOSITIONY = 500;
-	public static final int BALLSTARTSPEED = -5;
+	public static final int BALLSTARTSPEED = 5;
 	public static final int BALLMAXSPEED = 10;
 
 	//Border constants
@@ -40,4 +40,6 @@ public class Const {
 
 	//Live constants
 	public static final int STARTLIVES = 3;
+	
+	public static final int POWERUPPSIZEINCREASER = 10;
 }

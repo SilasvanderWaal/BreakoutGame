@@ -1,5 +1,6 @@
 package src;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -11,15 +12,17 @@ public class CollisionDetection {
 	private Game game;
 	private ArrayList<Border> borders;
 	private ArrayList<Ball> balls;
+	private powerUps powerups;
 
 	private int batOldX;
 
-	public CollisionDetection(ArrayList<Ball> balls, BoxCollection boxcollection, Bat bat, Game game, ArrayList<Border> borders) {
+	public CollisionDetection(ArrayList<Ball> balls, BoxCollection boxcollection, Bat bat, Game game, ArrayList<Border> borders, powerUps powerups) {
 		this.balls = balls;
 		this.boxcollection = boxcollection;
 		this.bat = bat;
 		this.game = game;
 		this.borders = borders;
+		this.powerups = powerups;
 	}
 
 	public void update(Keyboard keyboard) {
@@ -28,7 +31,12 @@ public class CollisionDetection {
 			batOldX = bat.getX();
 			bat.move(keyboard);
 		}else {
-			bat.setX(batOldX);
+			
+			if(bat.getX() > Const.WINDOWWIDTH / 2) {
+				bat.setX((Const.WINDOWWIDTH - Const.BORDERWIDTH) - bat.getWidth());
+			}else {
+				bat.setX(batOldX);
+			}
 		}
 
 		for(int j = 0; j < balls.size(); j++) {
@@ -83,13 +91,20 @@ public class CollisionDetection {
 			//Ball collision for boxes on row3
 			for(int i = 0; i < boxcollection.getRow3().size(); i++) {
 				ArrayList<Box> row3 = boxcollection.getRow3();
+				Box box = row3.get(i);
 
 				if(row3.get(i).Collision(ball)) {
-					ball.boxCollision(row3.get(i));
+					ball.boxCollision(box);
 
-					if(row3.get(i).isKilled()) {
+					if(box.isKilled()) {
+						
+						game.setScore(game.getScore() + 1);
+						
+						if(Math.random() < 0.5) {
+							powerups.getBlocks().add(new PowerUppBlock(box.getX() + (Const.BOXWIDTH / 2), box.getY() + Const.BOXHEIGHT + 20, 20, 20, Color.blue));
+						}
+						
 						row3.remove(i);
-						game.setScore(game.getScore() + 1);;
 					}
 
 					if(row3.isEmpty()) 
@@ -104,9 +119,12 @@ public class CollisionDetection {
 			}
 
 			//Looping over the balls and checking if they are out of the gamefield
-			for(Ball b : balls) {
+			for(int i = 0; i < balls.size(); i++) {
+				Ball b = balls.get(i);
 				if(b.ballOut()) {
 					game.setLives(game.getLives() - 1);
+					balls.remove(b);
+					balls.add(new Ball(Const.BALLSTARTPOSITIONX, Const.BALLSTARTPOSITIONY, Const.BALLWIDTH, Const.BALLHEIGHT));
 				}
 			}
 		}
