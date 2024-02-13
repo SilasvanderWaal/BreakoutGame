@@ -2,6 +2,8 @@ package src;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+
 import javax.swing.JComponent;
 
 public class GameBoard extends JComponent {
@@ -9,7 +11,9 @@ public class GameBoard extends JComponent {
 	private Game game;
 	private Keyboard keyboard;
 	
-	private Image img = Toolkit.getDefaultToolkit().getImage("C:\\Users\\silas\\git\\BreakoutGame\\Breakout\\src\\src\\breakout_bg.png");
+	private File imgFile = new File("breakout_bg.png");
+	private String imgFilePath = System.getProperty("user.dir") + "/src/" + "/src/" + imgFile.getPath();
+	private Image img = Toolkit.getDefaultToolkit().getImage(imgFilePath);
 	
 	private boolean isPaused;
 	
@@ -55,7 +59,7 @@ public class GameBoard extends JComponent {
 				this.repaint();
 				System.out.println("Game running");
 			}else {
-				System.out.println("Game paused");
+				System.out.println(imgFilePath);
 			}
 		}
 	}

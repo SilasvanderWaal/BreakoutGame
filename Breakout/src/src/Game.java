@@ -42,7 +42,7 @@ public class Game {
 		boxcollection = new BoxCollection();
 		
 				
-		powerups = new powerUps(balls, bat);
+		powerups = new powerUps(balls, bat, this);
 		
 		//Creates the collision detection system
 		collisiondetection = new CollisionDetection(balls, boxcollection, bat, this, borders, powerups);

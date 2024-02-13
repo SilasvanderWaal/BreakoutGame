@@ -5,15 +5,20 @@ import java.awt.Graphics2D;
 
 public class PowerUppBlock extends Sprite{
 	private Color color;
+	private String boxId;
 	
-	public PowerUppBlock(int x, int y, int width, int height, Color color) {
+	public PowerUppBlock(int x, int y, int width, int height, Color color, String boxId) {
 		super(x, y, width, height);
 		this.color = color;
-		// TODO Auto-generated constructor stub
+		this.boxId = boxId;
 	}
 
 	public Color getColor() {
 		return color;
+	}
+
+	public String getBoxId() {
+		return boxId;
 	}
 
 	@Override

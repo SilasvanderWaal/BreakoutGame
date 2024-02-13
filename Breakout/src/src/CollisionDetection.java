@@ -57,11 +57,15 @@ public class CollisionDetection {
 			//Ball collision with box on row1
 			for(int i = 0; i < boxcollection.getRow1().size(); i++) {
 				ArrayList<Box> row1 = boxcollection.getRow1();
+				Box box = row1.get(i);
 
 				if(row1.get(i).Collision(ball)) {
-					ball.boxCollision(row1.get(i));
+					ball.boxCollision(box);
 
-					if(row1.get(i).isKilled()) {
+					if(box.isKilled()) {
+						if(Math.random() < 0.1) {
+							powerups.getBlocks().add(new PowerUppBlock(box.getX() + (Const.BOXWIDTH / 2), box.getY() + Const.BOXHEIGHT + 20, 20, 20, Color.orange, "IncreaseScore20"));
+						}
 						row1.remove(i);
 						game.setScore(game.getScore() + 1);
 					}
@@ -74,11 +78,15 @@ public class CollisionDetection {
 			//Ball collision for boxes on row2
 			for(int i = 0; i < boxcollection.getRow2().size(); i++) {
 				ArrayList<Box> row2 = boxcollection.getRow2();
+				Box box = row2.get(i);
 
-				if(row2.get(i).Collision(ball)) {
-					ball.boxCollision(row2.get(i));
+				if(box.Collision(ball)) {
+					ball.boxCollision(box);
 
-					if(row2.get(i).isKilled()) {
+					if(box.isKilled()) {
+						if(Math.random() < 0.3) {
+							powerups.getBlocks().add(new PowerUppBlock(box.getX() + (Const.BOXWIDTH / 2), box.getY() + Const.BOXHEIGHT + 20, 20, 20, Color.green, "IncreaseScore10"));
+						}
 						row2.remove(i);
 						game.setScore(game.getScore() + 1);
 					}
@@ -101,7 +109,7 @@ public class CollisionDetection {
 						game.setScore(game.getScore() + 1);
 						
 						if(Math.random() < 0.5) {
-							powerups.getBlocks().add(new PowerUppBlock(box.getX() + (Const.BOXWIDTH / 2), box.getY() + Const.BOXHEIGHT + 20, 20, 20, Color.blue));
+							powerups.getBlocks().add(new PowerUppBlock(box.getX() + (Const.BOXWIDTH / 2), box.getY() + Const.BOXHEIGHT + 20, 20, 20, Color.blue, "IncreaseBatSize"));
 						}
 						
 						row3.remove(i);

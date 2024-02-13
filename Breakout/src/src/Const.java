@@ -41,5 +41,5 @@ public class Const {
 	//Live constants
 	public static final int STARTLIVES = 3;
 	
-	public static final int POWERUPPSIZEINCREASER = 10;
+	public static final int POWERUPPSIZEINCREASER = 15;
 }

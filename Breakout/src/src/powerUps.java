@@ -8,11 +8,13 @@ public class powerUps {
 	private Bat bat;
 	private ArrayList<Ball> balls;
 	private ArrayList<PowerUppBlock> blocks;
+	private Game game;
 	
-	public powerUps(ArrayList<Ball> balls, Bat bat) {
+	public powerUps(ArrayList<Ball> balls, Bat bat, Game game) {
 		this.bat = bat;
 		this.balls = balls;
 		blocks = new ArrayList<PowerUppBlock>();
+		this.game = game;
 	}
 	
 	public void update(Keyboard keyboard){
@@ -26,7 +28,14 @@ public class powerUps {
 			}
 				
 			if(block.Collision(bat)) {
-					increaseBatSize();
+					switch (block.getBoxId()) {
+					case "IncreaseScore10":	increaseScore(10); break;
+					case "IncreaseScore20": increaseScore(20); break;
+					case "IncreaseBatSize": increaseBatSize(); break;
+					default:
+						break;
+					}
+					
 					blocks.remove(i);
 			}
 		}
@@ -40,6 +49,10 @@ public class powerUps {
 	
 	public void increaseBatSize() {
 		bat.setWidth(bat.getWidth() + Const.POWERUPPSIZEINCREASER);
+	}
+	
+	public void increaseScore(int ammount) {
+		game.setScore(game.getScore() + ammount);
 	}
 
 	public ArrayList<PowerUppBlock> getBlocks() {
