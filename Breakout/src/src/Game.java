@@ -16,6 +16,7 @@ public class Game {
 
 	private int lives = Const.STARTLIVES;
 	private int score = 0;
+	private boolean isPaused = false;
 	
 	private powerUps powerups;
 
@@ -88,7 +89,7 @@ public class Game {
 		}	
 
 		//Display the lives scoreboard
-		graphics.setFont(new Font("livesFont", Font.ROMAN_BASELINE, Const.FONTSIZE));
+		graphics.setFont(new Font("SansSerif", Font.BOLD, Const.FONTSIZE));
 		graphics.drawString("Lives: " + Integer.toString(lives) , Const.WINDOWWIDTH / 4, Const.WINDOWHEIGHT);
 		
 		//Display the player score
@@ -96,7 +97,7 @@ public class Game {
 		
 		powerups.draw(graphics);
 	}
-
+	
 
 	public int getLives() {
 		return lives;
@@ -115,5 +116,15 @@ public class Game {
 
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+
+	public boolean isPaused() {
+		return isPaused;
+	}
+
+
+	public void setPaused(boolean isPaused) {
+		this.isPaused = isPaused;
 	}
 }

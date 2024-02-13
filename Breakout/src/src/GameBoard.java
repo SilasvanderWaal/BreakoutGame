@@ -8,8 +8,13 @@ public class GameBoard extends JComponent {
 	private final int FPS = 60; 
 	private Game game;
 	private Keyboard keyboard;
+	
+	private Image img = Toolkit.getDefaultToolkit().getImage("C:\\Users\\silas\\git\\BreakoutGame\\Breakout\\src\\src\\breakout_bg.png");
+	
+	private boolean isPaused;
+	
 	public GameBoard() {
-		keyboard = new Keyboard();
+		keyboard = new Keyboard(this);
 		game = new Game(this);
 	}
 
@@ -24,7 +29,8 @@ public class GameBoard extends JComponent {
 		super.paintComponent(arg0);
 		Graphics2D graphics = (Graphics2D)arg0;
 		graphics.setColor(Color.black);
-		graphics.fillRect(0, 0, getWidth(), getHeight());
+		graphics.drawImage(img, 0, 0, null);
+		setVisible(true);
 		game.draw(graphics);
 	}
 
@@ -39,13 +45,31 @@ public class GameBoard extends JComponent {
 
 	public void start() {
 		while(true) {
-			game.update(keyboard);
-			try {
-				Thread.sleep(1000 / FPS); //Throttle thread
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			if(isPaused == false) {
+				game.update(keyboard);
+				try {
+					Thread.sleep(1000 / FPS); //Throttle thread
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				this.repaint();
+				System.out.println("Game running");
+			}else {
+				System.out.println("Game paused");
 			}
-			this.repaint();
 		}
 	}
+	
+	public void pause() {
+		isPaused = true;
+	}
+	
+	public void resume() {
+		isPaused = false;
+	}
+	
+	public boolean isPaused() {
+		return isPaused;
+	}
 }
+

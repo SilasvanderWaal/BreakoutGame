@@ -2,41 +2,63 @@ package src;
 
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Keyboard {
-	HashMap<Key, Boolean> state;
-	public Keyboard() {
-		state = new HashMap<Key, Boolean>();
-		state.put(Key.Up, false);
-		state.put(Key.Down, false);
-		state.put(Key.Left, false);
-		state.put(Key.Right, false);
-		state.put(Key.Escape, false);
-		state.put(Key.Enter, false);
-		state.put(Key.Space, false);
-	}
-	
-	public boolean isKeyDown(Key key) {
-		if(state.containsKey(key)) {
-			return state.get(key);
-		}
-		return false;
-	}
-	
-	public boolean isKeyUp(Key key) {
-		return !isKeyDown(key);
-	}
-	
-	public void processKeyEvent(int key, boolean st) {
-		switch(key) {
-			case KeyEvent.VK_UP:     state.put(Key.Up,     st); break;
-			case KeyEvent.VK_DOWN:   state.put(Key.Down,   st); break;
-			case KeyEvent.VK_LEFT:   state.put(Key.Left,   st); break;
-			case KeyEvent.VK_RIGHT:  state.put(Key.Right,  st); break;
-			case KeyEvent.VK_ESCAPE: state.put(Key.Escape, st); break;
-			case KeyEvent.VK_ENTER:  state.put(Key.Enter,  st); break;
-			case KeyEvent.VK_SPACE:  state.put(Key.Space,  st); break;
-		}
-	}
-	
+    HashMap<Key, Boolean> state;
+    HashMap<Key, Boolean> previousState;
+    boolean enterPressedLastFrame;
+    private GameBoard gameBoard;
+
+    public Keyboard(GameBoard gameBoard) {
+        state = new HashMap<>();
+        previousState = new HashMap<>();
+        enterPressedLastFrame = false;
+        this.gameBoard = gameBoard;
+
+        for (Key key : Key.values()) {
+            state.put(key, false);
+            previousState.put(key, false);
+        }
+    }
+
+    public boolean isKeyDown(Key key) {
+        return state.containsKey(key) && state.get(key);
+    }
+
+    public boolean isKeyUp(Key key) {
+        return !isKeyDown(key);
+    }
+
+    public boolean isKeyPressed(Key key) {
+        return isKeyDown(key) && !previousState.get(key);
+    }
+
+    public void processKeyEvent(int keyCode, boolean pressed) {
+        // Update the previousState map before updating the state map
+        for (Map.Entry<Key, Boolean> entry : state.entrySet()) {
+            previousState.put(entry.getKey(), entry.getValue());
+        }
+        
+        // Update the state map with the new key event
+        for (Key key : Key.values()) {
+            if (key.getKeyCode() == keyCode) {
+                state.put(key, pressed);
+                break;
+            }
+        }
+        
+        if (keyCode == KeyEvent.VK_ENTER && pressed && !enterPressedLastFrame) {
+            // Toggle pause state here
+            if (gameBoard.isPaused()) {
+            	gameBoard.resume();
+               
+            } else {
+                gameBoard.pause();
+            }
+            enterPressedLastFrame = true;
+        } else if (keyCode == KeyEvent.VK_ENTER && !pressed) {
+            enterPressedLastFrame = false;
+        }
+    }
 }
