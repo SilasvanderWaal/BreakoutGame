@@ -19,6 +19,7 @@ public class Program extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
 		board.start();
+		
 	}
 	
 	@Override

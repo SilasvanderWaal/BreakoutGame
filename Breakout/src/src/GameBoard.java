@@ -3,8 +3,12 @@ package src;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.util.Timer;
 
+import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class GameBoard extends JComponent {
 	private final int FPS = 60; 
@@ -15,11 +19,18 @@ public class GameBoard extends JComponent {
 	private String imgFilePath = System.getProperty("user.dir") + "/src/" + "/src/" + imgFile.getPath();
 	private Image img = Toolkit.getDefaultToolkit().getImage(imgFilePath);
 	
-	private boolean isPaused;
+	private boolean isPaused = false;
+	
+	private Program program;
+	
+	private Menu menuPanel;
 	
 	public GameBoard() {
 		keyboard = new Keyboard(this);
 		game = new Game(this);
+		menuPanel = new Menu(this);
+		this.setLayout(new BorderLayout());
+		add(menuPanel, BorderLayout.CENTER);
 	}
 
 	@Override
@@ -56,12 +67,25 @@ public class GameBoard extends JComponent {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+				
 				this.repaint();
-				System.out.println("Game running");
+			
 			}else {
-				System.out.println(imgFilePath);
+				System.out.println("Game paused");
+				
 			}
 		}
+	}
+	
+	public void showMenu() {
+		pause();
+		menuPanel.setVisible(true);
+	}
+	
+	public void hideMenu() {
+		menuPanel.setVisible(false);
+		this.grabFocus();
+		resume();
 	}
 	
 	public void pause() {
@@ -76,4 +100,3 @@ public class GameBoard extends JComponent {
 		return isPaused;
 	}
 }
-
