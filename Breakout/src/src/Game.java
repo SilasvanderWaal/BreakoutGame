@@ -61,12 +61,6 @@ public class Game {
 		
 		//Updating the collision detection system
 		collisiondetection.update(keyboard);
-
-		//Display game over if there are no lives left
-		if(lives == 0 ) {
-			JOptionPane.showMessageDialog(null, "Game over! Score: " + score);
-			System.exit(0);
-		}
 		
 		powerups.update(keyboard);
 	}

@@ -67,7 +67,7 @@ public class CollisionDetection {
 							powerups.getBlocks().add(new PowerUppBlock(box.getX() + (Const.BOXWIDTH / 2), box.getY() + Const.BOXHEIGHT + 20, 20, 20, Color.orange, "IncreaseScore20"));
 						}
 						row1.remove(i);
-						game.setScore(game.getScore() + 1);
+						game.setScore(game.getScore() + box.getPoints());
 					}
 
 					if(row1.isEmpty())
@@ -88,7 +88,7 @@ public class CollisionDetection {
 							powerups.getBlocks().add(new PowerUppBlock(box.getX() + (Const.BOXWIDTH / 2), box.getY() + Const.BOXHEIGHT + 20, 20, 20, Color.green, "IncreaseScore10"));
 						}
 						row2.remove(i);
-						game.setScore(game.getScore() + 1);
+						game.setScore(game.getScore() + box.getPoints());
 					}
 
 					if(row2.isEmpty()) 
@@ -106,7 +106,7 @@ public class CollisionDetection {
 
 					if(box.isKilled()) {
 						
-						game.setScore(game.getScore() + 1);
+						game.setScore(game.getScore() + box.getPoints());
 						
 						if(Math.random() < 0.5) {
 							powerups.getBlocks().add(new PowerUppBlock(box.getX() + (Const.BOXWIDTH / 2), box.getY() + Const.BOXHEIGHT + 20, 20, 20, Color.blue, "IncreaseBatSize"));

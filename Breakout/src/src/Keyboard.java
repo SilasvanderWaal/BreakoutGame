@@ -52,12 +52,10 @@ public class Keyboard {
             // Toggle pause state here
             if (gameBoard.isPaused()) {
             	gameBoard.hideMenu();
-            	
-               
             } else {
-               
                 gameBoard.showMenu();
             }
+            
             enterPressedLastFrame = true;
         } else if (keyCode == KeyEvent.VK_ENTER && !pressed) {
             enterPressedLastFrame = false;

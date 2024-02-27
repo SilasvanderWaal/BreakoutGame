@@ -1,6 +1,5 @@
 package src;
 
-
 import java.awt.TextArea;
 import java.awt.event.KeyEvent;
 
@@ -10,14 +9,15 @@ import javax.swing.*;
 public class Program extends JFrame {
 	GameBoard board;
 	TextArea score;
-	
+
 	public Program() {
 		board = new GameBoard();
 		add(board);
-		setResizable(true);
+		setResizable(false);	
 		pack();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
+		
 		board.start();
 		
 	}

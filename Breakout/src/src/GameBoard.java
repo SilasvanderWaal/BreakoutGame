@@ -3,11 +3,13 @@ package src;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Timer;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class GameBoard extends JComponent {
@@ -21,16 +23,29 @@ public class GameBoard extends JComponent {
 	
 	private boolean isPaused = false;
 	
-	private Program program;
+	private JPanel menuHolder;
+	CardLayout card;
 	
-	private Menu menuPanel;
-	
+	private Menu pauseMenu;
+	private Menu deathMenu;
+		
 	public GameBoard() {
 		keyboard = new Keyboard(this);
 		game = new Game(this);
-		menuPanel = new Menu(this);
+			
 		this.setLayout(new BorderLayout());
-		add(menuPanel, BorderLayout.CENTER);
+		card = new CardLayout();
+		
+		menuHolder = new JPanel(card);
+		menuHolder.setVisible(false);
+		
+		pauseMenu = new Menu(this, "Game paused");
+		deathMenu = new Menu(this, "Game over");
+		
+		menuHolder.add(pauseMenu, "pause");
+		menuHolder.add(deathMenu, "death");
+
+		add(menuHolder, BorderLayout.CENTER);
 	}
 
 	@Override
@@ -69,21 +84,49 @@ public class GameBoard extends JComponent {
 				}
 				
 				this.repaint();
-			
-			}else {
-				System.out.println("Game paused");
 				
+				if(game.getLives() == 0) {
+					this.showDeathMenu();
+				}
+			
+			}else if(isPaused == true){
+				System.out.println("Game paused");
 			}
 		}
 	}
 	
+	public void restart() {
+		game = null;
+		game = new Game(this);
+		hideDeathMenu();
+	}
+	
 	public void showMenu() {
 		pause();
-		menuPanel.setVisible(true);
+		menuHolder.setVisible(true);
+		card.show(menuHolder, "pause");
 	}
 	
 	public void hideMenu() {
-		menuPanel.setVisible(false);
+		menuHolder.setVisible(false);
+		this.grabFocus();
+		resume();
+	}
+	
+	public void death() {
+		pause();
+		String name = JOptionPane.showInputDialog("Enter your inithials");
+	}
+	
+	public void showDeathMenu() {
+		pause();
+		
+		menuHolder.setVisible(true);
+		card.show(menuHolder, "death");
+	}
+	
+	public void hideDeathMenu(){
+		menuHolder.setVisible(false);
 		this.grabFocus();
 		resume();
 	}

@@ -6,10 +6,12 @@ import java.awt.Graphics2D;
 public class Box extends Sprite{
 	private Color color;
 	private int lives;
+	private int points;
 
 	public Box(int x, int y, int width, int height, int lives){
 		super(x, y , width, height);
 		this.lives = lives;
+		points = lives; 
 	}
 
 	@Override
@@ -46,5 +48,9 @@ public class Box extends Sprite{
 			lives--;
 			return false;
 		}
+	}
+
+	public int getPoints() {
+		return points;
 	}
 }
