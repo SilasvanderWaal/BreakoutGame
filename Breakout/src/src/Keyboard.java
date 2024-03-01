@@ -48,7 +48,7 @@ public class Keyboard {
             }
         }
         
-        if (keyCode == KeyEvent.VK_ENTER && pressed && !enterPressedLastFrame) {
+        if (keyCode == KeyEvent.VK_ENTER && pressed && !enterPressedLastFrame && !gameBoard.isDead()) {
             // Toggle pause state here
             if (gameBoard.isPaused()) {
             	gameBoard.hideMenu();

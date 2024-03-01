@@ -39,7 +39,9 @@ public class Const {
 	public static final int SMALLSCORE = 1;
 
 	//Live constants
-	public static final int STARTLIVES = 3;
+	public static final int STARTLIVES = 1;
 	
 	public static final int POWERUPPSIZEINCREASER = 15;
+	
+	public static final int MAXHIGHSCORES = 10;
 }

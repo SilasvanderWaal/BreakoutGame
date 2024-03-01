@@ -34,13 +34,13 @@ public class Menu extends JPanel implements ActionListener{
 	
 	private JLabel header;
 	
-	private  JList<Integer> latestRuns;
+	private  JList<String> latestRuns;
 	private  JLabel latestRunsHeader;
-	private static LatestRuns latestRunsList;
+	private  LatestRuns latestRunsList;
 
 	private  JLabel scoreboardHeader;
-	private  JList<Integer> scoreboard;
-	private static HighScores highscoresList;
+	private  JList<String> scoreboard;
+	private  HighScores highscoresList;
 
     public Menu(GameBoard gb, String gameStatus) {
         this.gb = gb;
@@ -56,74 +56,82 @@ public class Menu extends JPanel implements ActionListener{
         this.setOpaque(true);
         this.setLayout(new BorderLayout());
         
-        initComponents();
+        north();
+        east();
+        west();
+        center();
     }
                        
-    private void initComponents() {    	
-    	//North
-    	north = new JPanel();
-    	header = new JLabel(gameStatus);
-    	
-    	north.add(header);
-    	header.setHorizontalAlignment(JLabel.CENTER);
-    	header.setFont(new Font("Georgia", 0, 36));
-    	
-    	add(north, BorderLayout.NORTH);
-    	
-    	//EAST
-    	east = new JPanel();
-    	highscoresList = new HighScores();
-    	scoreboardHeader = new JLabel("Highscores");
-    	scoreboard = new JList<Integer>(highscoresList);
-    	
-    	east.add(scoreboardHeader);
-    	east.add(scoreboard);
-    	
-    	add(east, BorderLayout.EAST);
-    	east.setLayout(new BoxLayout(east, BoxLayout.Y_AXIS));
-    	
-    	//WEST
-    	west = new JPanel();
-    	latestRunsList = new LatestRuns();
-    	latestRuns = new JList<Integer>(latestRunsList);
-    	latestRunsHeader = new JLabel("Latest runs");
-    	
-    	west.add(latestRunsHeader);
-    	west.add(latestRuns);
-    	
-    	add(west, BorderLayout.WEST);
-    	west.setLayout(new BoxLayout(west, BoxLayout.Y_AXIS));
+	//North
+	public void north() {
+	north = new JPanel();
+	header = new JLabel(gameStatus);
+	
+	north.add(header);
+	header.setHorizontalAlignment(JLabel.CENTER);
+	header.setFont(new Font("Georgia", 0, 36));
+	
+	add(north, BorderLayout.NORTH);
+	}
+	
+	public void east() {
+	east = new JPanel();
+	highscoresList = new HighScores();
+	scoreboardHeader = new JLabel("Highscores");
+	scoreboard = new JList<String>(highscoresList);
+	
+	east.add(scoreboardHeader);
+	east.add(scoreboard);
+	
+	add(east, BorderLayout.EAST);
+	east.setLayout(new BoxLayout(east, BoxLayout.Y_AXIS));
+	}
+	
+	
+	public void west() {
+	west = new JPanel();
+	latestRunsList = new LatestRuns();
+	latestRuns = new JList<String>(latestRunsList);
+	
+	latestRunsHeader = new JLabel("Latest runs");
+	
+	west.add(latestRunsHeader);
+	west.add(latestRuns);
+	
+	add(west, BorderLayout.WEST);
+	west.setLayout(new BoxLayout(west, BoxLayout.Y_AXIS));
+	}
 
-    	
-    	
-    	//CENTER
-    	buttonLeft = new JButton(playButton);
-    	buttonRight = new JButton("Exit");
-    	buttons = new JPanel();
-    	center = new JPanel(new GridBagLayout());
-    	
-    	buttonLeft.addActionListener(this);
-        if(this.gameStatus == "Game paused")
-        	buttonLeft.setActionCommand("resume");
-        
-        if(this.gameStatus == "Game over")
-        	buttonLeft.setActionCommand("restart");
-    	
-    	buttonRight.addActionListener(this);
-    	buttonRight.setActionCommand("exit");
+	
+	
+	public void center() {
+	buttonLeft = new JButton(playButton);
+	buttonRight = new JButton("Exit");
+	buttons = new JPanel();
+	center = new JPanel(new GridBagLayout());
+	
+	buttonLeft.addActionListener(this);
+    if(this.gameStatus == "Game paused")
+    	buttonLeft.setActionCommand("resume");
     
-    	buttons.add(buttonLeft);
-    	buttons.add(buttonRight);
-    	
-    	center.add(buttons);
-    	
-    	add(center, BorderLayout.CENTER);
-    	
-    	
-    	//DEBUGING
- 
-    	
+    if(this.gameStatus == "Game over")
+    	buttonLeft.setActionCommand("restart");
+	
+	buttonRight.addActionListener(this);
+	buttonRight.setActionCommand("exit");
+
+	buttons.add(buttonLeft);
+	buttons.add(buttonRight);
+	
+	center.add(buttons);
+	
+	add(center, BorderLayout.CENTER);
     }
+	
+	public void addLatestRun(int score) {
+		latestRunsList.addLatest(score);
+		highscoresList.update(score);
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

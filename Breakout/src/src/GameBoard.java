@@ -22,6 +22,7 @@ public class GameBoard extends JComponent {
 	private Image img = Toolkit.getDefaultToolkit().getImage(imgFilePath);
 	
 	private boolean isPaused = false;
+	private boolean isDead = false;
 	
 	private JPanel menuHolder;
 	CardLayout card;
@@ -75,7 +76,7 @@ public class GameBoard extends JComponent {
 
 	public void start() {
 		while(true) {
-			if(isPaused == false) {
+			if(isPaused == false && isDead == false) {
 				game.update(keyboard);
 				try {
 					Thread.sleep(1000 / FPS); //Throttle thread
@@ -86,7 +87,8 @@ public class GameBoard extends JComponent {
 				this.repaint();
 				
 				if(game.getLives() == 0) {
-					this.showDeathMenu();
+					this.death();
+					isDead = true;
 				}
 			
 			}else if(isPaused == true){
@@ -98,6 +100,7 @@ public class GameBoard extends JComponent {
 	public void restart() {
 		game = null;
 		game = new Game(this);
+		isDead = false;
 		hideDeathMenu();
 	}
 	
@@ -115,12 +118,12 @@ public class GameBoard extends JComponent {
 	
 	public void death() {
 		pause();
-		String name = JOptionPane.showInputDialog("Enter your inithials");
+		pauseMenu.addLatestRun(game.getScore());
+		deathMenu.addLatestRun(game.getScore());
+		showDeathMenu();
 	}
 	
 	public void showDeathMenu() {
-		pause();
-		
 		menuHolder.setVisible(true);
 		card.show(menuHolder, "death");
 	}
@@ -141,5 +144,13 @@ public class GameBoard extends JComponent {
 	
 	public boolean isPaused() {
 		return isPaused;
+	}
+
+	public boolean isDead() {
+		return isDead;
+	}
+
+	public void setDead(boolean isDead) {
+		this.isDead = isDead;
 	}
 }
