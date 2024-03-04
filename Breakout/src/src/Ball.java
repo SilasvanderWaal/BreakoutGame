@@ -15,7 +15,7 @@ public class Ball extends Sprite{
 		//Sets the default speed, random random angle
 		ySpeed = -Const.BALLSTARTSPEED;
 		xSpeed = (int)(Math.random()*4) + 2;
-		if(Math.random() < 0.5) {
+		if(Math.random() < Const.FIFTYPROCENT) {
 			xSpeed *= -1;
 		}
 	}

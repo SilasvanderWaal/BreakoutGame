@@ -69,7 +69,7 @@ public class Menu extends JPanel implements ActionListener{
 	
 	north.add(header);
 	header.setHorizontalAlignment(JLabel.CENTER);
-	header.setFont(new Font("Georgia", 0, 36));
+	header.setFont(new Font("Georgia", 0, Const.FONTSIZE));
 	
 	add(north, BorderLayout.NORTH);
 	}
@@ -128,10 +128,17 @@ public class Menu extends JPanel implements ActionListener{
 	add(center, BorderLayout.CENTER);
     }
 	
-	public void addLatestRun(int score) {
+	public void addLatestRun(int score, Menu pauseMenu) {
 		latestRunsList.addLatest(score);
-		highscoresList.update(score);
+		highscoresList.update(score, pauseMenu);
 	}
+	
+	public void addLatestRun(int score, Menu pauseMenu, String initials) {
+		latestRunsList.addLatest(score);
+		highscoresList.update(score, pauseMenu, initials);
+	}
+	
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

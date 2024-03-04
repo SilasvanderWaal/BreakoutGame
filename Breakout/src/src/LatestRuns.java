@@ -12,8 +12,7 @@ public class LatestRuns extends DefaultListModel<String>{
 	public void addLatest(int score) {
 		this.add(0, "" + score);
 		
-		if(this.size() > 3)
-			this.remove(3);
-
+		if(this.size() > Const.MAXLATESTSCORES)
+			this.remove(Const.MAXLATESTSCORES);
 	}
 }

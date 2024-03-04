@@ -12,7 +12,6 @@ public class Game {
 	private ArrayList<Border> borders;
 	private BoxCollection boxcollection;
 	private CollisionDetection collisiondetection;
-	public Box box;
 
 	private int lives = Const.STARTLIVES;
 	private int score = 0;

@@ -51,7 +51,7 @@ public class GameBoard extends JComponent {
 
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(800, 600);
+		return new Dimension(Const.WINDOWWIDTH, Const.WINDOWHEIGHT);
 	}
 
 	@Override
@@ -118,8 +118,7 @@ public class GameBoard extends JComponent {
 	
 	public void death() {
 		pause();
-		pauseMenu.addLatestRun(game.getScore());
-		deathMenu.addLatestRun(game.getScore());
+		deathMenu.addLatestRun(game.getScore(), pauseMenu);
 		showDeathMenu();
 	}
 	
