@@ -16,7 +16,7 @@ public class Game {
 	private int lives = Const.STARTLIVES;
 	private int score = 0;
 	private boolean isPaused = false;
-	
+
 	private powerUps powerups;
 
 
@@ -24,7 +24,7 @@ public class Game {
 		//Creates a list for all balls and adds the first one
 		balls = new ArrayList<Ball>();
 		balls.add(new Ball(Const.BALLSTARTPOSITIONX, Const.BALLSTARTPOSITIONY, Const.BALLWIDTH, Const.BALLHEIGHT));
-		
+
 		//Creates the player
 		bat = new Bat(Const.PLAYERSTARTPOSITIONX, Const.PLAYERSTARTPOSITIONY, Const.PLAYERWIDTH, Const.PLAYERHEIGHT);
 
@@ -39,10 +39,10 @@ public class Game {
 
 		//Creates a collection with all the bricks
 		boxcollection = new BoxCollection();
-		
-				
+
+		//Creates the powerups
 		powerups = new powerUps(balls, bat, this);
-		
+
 		//Creates the collision detection system
 		collisiondetection = new CollisionDetection(balls, boxcollection, bat, this, borders, powerups);
 
@@ -54,13 +54,13 @@ public class Game {
 		for(Ball b : balls) {
 			b.update(keyboard);
 		}
-		
+
 		//Updating the player
 		bat.update(keyboard);
-		
+
 		//Updating the collision detection system
 		collisiondetection.update(keyboard);
-		
+
 		powerups.update(keyboard);
 	}
 
@@ -84,13 +84,13 @@ public class Game {
 		//Display the lives scoreboard
 		graphics.setFont(new Font("SansSerif", Font.BOLD, Const.FONTSIZE));
 		graphics.drawString("Lives: " + Integer.toString(lives) , Const.WINDOWWIDTH / 4, Const.WINDOWHEIGHT);
-		
+
 		//Display the player score
 		graphics.drawString("Score: "+ Integer.toString(score), 2 * (Const.WINDOWWIDTH / 4), Const.WINDOWHEIGHT);
-		
+
 		powerups.draw(graphics);
 	}
-	
+
 
 	public int getLives() {
 		return lives;

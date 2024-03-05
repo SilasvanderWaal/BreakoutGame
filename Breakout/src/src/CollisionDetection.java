@@ -26,7 +26,7 @@ public class CollisionDetection {
 	}
 
 	public void update(Keyboard keyboard) {
-			batCollisionWithBorder(keyboard);
+		batCollisionWithBorder(keyboard);
 
 		for(int j = 0; j < balls.size(); j++) {
 			Ball ball = balls.get(j);
@@ -35,17 +35,17 @@ public class CollisionDetection {
 			row2Collision(keyboard, ball);
 			row3Collision(keyboard, ball);
 			ballOutOfField(keyboard);
-			rowIsEmpty(keyboard);
+			allRowsEmpty(keyboard);
 		}
 	}
-	
+
 	public void batCollisionWithBorder(Keyboard keyboard) {
 		//Bat collision with border
 		if(!bat.Collision(borders.get(0)) && !bat.Collision(borders.get(2))) {
 			batOldX = bat.getX();
 			bat.move(keyboard);
 		}else {
-			
+
 			if(bat.getX() > Const.WINDOWWIDTH / 2) {
 				bat.setX((Const.WINDOWWIDTH - Const.BORDERWIDTH) - bat.getWidth());
 			}else {
@@ -53,7 +53,7 @@ public class CollisionDetection {
 			}
 		}
 	}
-	
+
 	public void ballCollistionWithGamefield(Keyboard keyboard, Ball ball) {
 		//Ball collision with side borders
 		if(ball.Collision(borders.get(0)) || ball.Collision(borders.get(2))) 
@@ -62,18 +62,18 @@ public class CollisionDetection {
 		//Ball collision with top border
 		else if(ball.Collision(borders.get(1))) 
 			ball.topBorderCollision(borders.get(1));
-	
+
 		//Ball collision with bat
 		else if(ball.Collision(bat)) 
 			ball.batCollision(bat);
 	}
-	
+
 	public void row1Collision(Keyboard keyboard, Ball ball) {
 		//Ball collision with box on row1
 		for(int i = 0; i < boxcollection.getRow1().size(); i++) {
 			ArrayList<Box> row1 = boxcollection.getRow1();
 			Box box = row1.get(i);
-			
+
 			if(row1.get(i).Collision(ball)) {
 				ball.boxCollision(box);
 
@@ -90,7 +90,7 @@ public class CollisionDetection {
 			}
 		}
 	}
-	
+
 	public void row2Collision(Keyboard keyboard, Ball ball) {
 		//Ball collision for boxes on row2
 		for(int i = 0; i < boxcollection.getRow2().size(); i++) {
@@ -113,7 +113,7 @@ public class CollisionDetection {
 			}
 		}
 	}
-	
+
 	public void row3Collision(Keyboard kayboard, Ball ball) {
 		//Ball collision for boxes on row3
 		for(int i = 0; i < boxcollection.getRow3().size(); i++) {
@@ -124,13 +124,13 @@ public class CollisionDetection {
 				ball.boxCollision(box);
 
 				if(box.isKilled()) {
-					
+
 					game.setScore(game.getScore() + box.getPoints());
-					
+
 					if(Math.random() < Const.FIFTYPROCENT) {
 						powerups.getBlocks().add(new PowerUppBlock(box.getX() + (Const.BOXWIDTH / 2), box.getY() + Const.BOXHEIGHT + Const.POWERUPPBLOCKHEIGHT, Const.POWERUPPBLOCKWIDTH, Const.POWERUPPBLOCKHEIGHT, Color.blue, "IncreaseBatSize"));
 					}
-					
+
 					row3.remove(i);
 				}
 
@@ -139,7 +139,7 @@ public class CollisionDetection {
 			}
 		}
 	}
-	
+
 	public void ballOutOfField(Keyboard keyboard) {
 		//Looping over the balls and checking if they are out of the gamefield
 		for(int i = 0; i < balls.size(); i++) {
@@ -151,12 +151,12 @@ public class CollisionDetection {
 			}
 		}
 	}
-	
-	public void rowIsEmpty(Keyboard keyboard) {
-		//Checking if a entire row is deleted
+
+	public void allRowsEmpty(Keyboard keyboard) {
+		//Checking if all rows are empty
 		if(boxcollection.getRow1().isEmpty() && boxcollection.getRow2().isEmpty() && boxcollection.getRow3().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "You won! Score: " + game.getScore());
-			System.exit(0);
+			game.setLives(0);
 		}
 	}
 }

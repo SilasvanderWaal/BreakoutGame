@@ -16,33 +16,33 @@ public class GameBoard extends JComponent {
 	private final int FPS = 60; 
 	private Game game;
 	private Keyboard keyboard;
-	
+
 	private File imgFile = new File("breakout_bg.png");
 	private String imgFilePath = System.getProperty("user.dir") + "/src/" + "/src/" + imgFile.getPath();
 	private Image img = Toolkit.getDefaultToolkit().getImage(imgFilePath);
-	
+
 	private boolean isPaused = false;
 	private boolean isDead = false;
-	
+
 	private JPanel menuHolder;
 	CardLayout card;
-	
+
 	private Menu pauseMenu;
 	private Menu deathMenu;
-		
+
 	public GameBoard() {
 		keyboard = new Keyboard(this);
 		game = new Game(this);
-			
+
 		this.setLayout(new BorderLayout());
 		card = new CardLayout();
-		
+
 		menuHolder = new JPanel(card);
 		menuHolder.setVisible(false);
-		
+
 		pauseMenu = new Menu(this, "Game paused");
 		deathMenu = new Menu(this, "Game over");
-		
+
 		menuHolder.add(pauseMenu, "pause");
 		menuHolder.add(deathMenu, "death");
 
@@ -76,71 +76,71 @@ public class GameBoard extends JComponent {
 
 	public void start() {
 		while(true) {
-			if(isPaused == false && isDead == false) {
+			if(!isPaused && !isDead) {
 				game.update(keyboard);
 				try {
 					Thread.sleep(1000 / FPS); //Throttle thread
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				
+
 				this.repaint();
-				
+
 				if(game.getLives() == 0) {
 					this.death();
 					isDead = true;
 				}
-			
+
 			}else if(isPaused == true){
 				System.out.println("Game paused");
 			}
 		}
 	}
-	
+
 	public void restart() {
 		game = null;
 		game = new Game(this);
 		isDead = false;
 		hideDeathMenu();
 	}
-	
+
 	public void showMenu() {
 		pause();
 		menuHolder.setVisible(true);
 		card.show(menuHolder, "pause");
 	}
-	
+
 	public void hideMenu() {
 		menuHolder.setVisible(false);
 		this.grabFocus();
 		resume();
 	}
-	
+
 	public void death() {
 		pause();
 		deathMenu.addLatestRun(game.getScore(), pauseMenu);
 		showDeathMenu();
 	}
-	
+
 	public void showDeathMenu() {
 		menuHolder.setVisible(true);
 		card.show(menuHolder, "death");
 	}
-	
+
 	public void hideDeathMenu(){
 		menuHolder.setVisible(false);
 		this.grabFocus();
 		resume();
 	}
-	
+
 	public void pause() {
 		isPaused = true;
 	}
-	
+
 	public void resume() {
 		isPaused = false;
 	}
-	
+
 	public boolean isPaused() {
 		return isPaused;
 	}

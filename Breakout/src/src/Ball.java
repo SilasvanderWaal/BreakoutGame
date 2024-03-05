@@ -40,7 +40,7 @@ public class Ball extends Sprite{
 
 	//Changes the ball direction on a collision with the player, also detects side collisions
 	public void batCollision(Bat bat) {
-		
+
 		//Moving back the ball to previous x to see if the collision still is true
 		newX = this.getX();
 		interpoltate(xSpeed);
@@ -51,7 +51,7 @@ public class Ball extends Sprite{
 			ySpeed *= -1;
 			this.setY(bat.getY() - this.getHeight());
 		}else {
-			
+
 			//If the collision is false it is a side hit.
 			if(xSpeed < 0) {
 				this.setX(bat.getX() + bat.getWidth());
@@ -62,14 +62,14 @@ public class Ball extends Sprite{
 			xSpeed *= -1;
 		}
 	}
-	
+
 	//Changes the ball direction on a collision with a box, also detects side collisions
 	public void boxCollision(Box box) {
-		
+
 		newX = this.getX();
 		//Replace the ball to the previous X coordinate, keep the Y.
 		interpoltate(xSpeed);
-		
+
 		//If the box still is in collision with the ball, it is either a top or a bottom hit
 		if(this.Collision(box)) {
 			if(ySpeed < 0) {
@@ -89,7 +89,7 @@ public class Ball extends Sprite{
 
 			xSpeed *= -1;
 		}
-		
+
 		//Increase the speed
 		if(ySpeed < Const.BALLMAXSPEED && ySpeed > -Const.BALLMAXSPEED) {
 			if(ySpeed < 0) {
@@ -106,7 +106,7 @@ public class Ball extends Sprite{
 		setY(getY() + ySpeed);
 		setX(getX() + xSpeed);
 	}
-	
+
 	//Checks if the ball is out of the game field
 	public boolean ballOut() {
 		if( this.getY() > Const.WINDOWHEIGHT) {
@@ -115,7 +115,7 @@ public class Ball extends Sprite{
 			return false;
 		}
 	}
-	
+
 	public void interpoltate(int x) {
 		this.setX(this.getX() - xSpeed);
 	}

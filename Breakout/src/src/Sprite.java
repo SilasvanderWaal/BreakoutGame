@@ -1,4 +1,4 @@
-	package src;
+package src;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -19,10 +19,10 @@ public abstract class Sprite {
 		this.width = width;
 		this.height = height;
 	}
-	
+
 	public abstract void update(Keyboard keyboard);
 	public abstract void draw(Graphics2D graphics);
-	
+
 	public boolean Collision(Sprite objekt) {
 		Rectangle rec1 = new Rectangle(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 		Rectangle rec2 = new Rectangle(objekt.getX(), objekt.getY(), objekt.getWidth(), objekt.getHeight());

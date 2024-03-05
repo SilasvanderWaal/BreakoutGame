@@ -41,18 +41,18 @@ public class Const {
 
 	//Live constants
 	public static final int STARTLIVES = 3;
-	
+
 	public static final int POWERUPPSIZEINCREASER = 15;
-	
+
 	public static final int MAXHIGHSCORES = 10;
 	public static final int MAXLATESTSCORES = 3;
-	
+
 	public static final double FIFTYPROCENT = 0.5;
 	public static final double THIRTHYPROCENT = 0.3;
 	public static final double TENPROCENT = 0.1;	
-	
+
 	public static final int POWERUPPBLOCKHEIGHT = 20;
 	public static final int POWERUPPBLOCKWIDTH = 20;
 
-	
+
 }
