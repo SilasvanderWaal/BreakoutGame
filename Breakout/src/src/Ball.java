@@ -22,7 +22,7 @@ public class Ball extends Sprite{
 
 
 	//Changes the ball direction on a collision with a side border
-	public void sideBorderCollsion(Border b) {
+	public void sideBorderCollsion() {
 		if (xSpeed < 0) {
 			this.setX(0 + Const.BORDERWIDTH);
 		}else {
@@ -41,9 +41,9 @@ public class Ball extends Sprite{
 	//Changes the ball direction on a collision with the player, also detects side collisions
 	public void batCollision(Bat bat) {
 
-		//Moving back the ball to previous x to see if the collision still is true
+		//Moving back the ball to one x to see if the collision still is true
 		newX = this.getX();
-		interpoltate(xSpeed);
+		interpolate();
 
 		//If the collision still is true it is a top hit
 		if(this.Collision(bat)) {
@@ -67,8 +67,8 @@ public class Ball extends Sprite{
 	public void boxCollision(Box box) {
 
 		newX = this.getX();
-		//Replace the ball to the previous X coordinate, keep the Y.
-		interpoltate(xSpeed);
+		//Moving the ball back one X coordinate, keep the Y.
+		interpolate();
 
 		//If the box still is in collision with the ball, it is either a top or a bottom hit
 		if(this.Collision(box)) {
@@ -116,8 +116,8 @@ public class Ball extends Sprite{
 		}
 	}
 
-	public void interpoltate(int x) {
-		this.setX(this.getX() - xSpeed);
+	public void interpolate() {
+		this.setX(this.getX() - 1);
 	}
 
 	@Override 

@@ -26,7 +26,7 @@ public class Bat extends Sprite{
 
 	@Override
 	public void update(Keyboard keyboard) {
-
+		move(keyboard);
 	}
 
 

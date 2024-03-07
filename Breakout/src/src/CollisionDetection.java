@@ -43,13 +43,13 @@ public class CollisionDetection {
 		//Bat collision with border
 		if(!bat.Collision(borders.get(0)) && !bat.Collision(borders.get(2))) {
 			batOldX = bat.getX();
-			bat.move(keyboard);
+			
 		}else {
 
 			if(bat.getX() > Const.WINDOWWIDTH / 2) {
 				bat.setX((Const.WINDOWWIDTH - Const.BORDERWIDTH) - bat.getWidth());
 			}else {
-				bat.setX(batOldX);
+				bat.setX(Const.BORDERWIDTH);
 			}
 		}
 	}
@@ -57,7 +57,7 @@ public class CollisionDetection {
 	public void ballCollistionWithGamefield(Keyboard keyboard, Ball ball) {
 		//Ball collision with side borders
 		if(ball.Collision(borders.get(0)) || ball.Collision(borders.get(2))) 
-			ball.sideBorderCollsion(borders.get(2));
+			ball.sideBorderCollsion();
 
 		//Ball collision with top border
 		else if(ball.Collision(borders.get(1))) 
