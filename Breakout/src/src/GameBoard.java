@@ -119,11 +119,11 @@ public class GameBoard extends JComponent {
 	public void death() {
 		pause();
 		deathMenu.addLatestRun(game.getScore(), pauseMenu);
-		
+
 		//Reset the key input
 		keyboard.processKeyEvent(Key.Left.getKeyCode(), false);
 		keyboard.processKeyEvent(Key.Right.getKeyCode(), false);
-		
+
 		showDeathMenu();
 	}
 

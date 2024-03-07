@@ -8,7 +8,6 @@ import javax.swing.*;
 
 public class Program extends JFrame {
 	GameBoard board;
-	TextArea score;
 
 	public Program() {
 		board = new GameBoard();

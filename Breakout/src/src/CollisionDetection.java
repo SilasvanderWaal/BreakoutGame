@@ -43,7 +43,7 @@ public class CollisionDetection {
 		//Bat collision with border
 		if(!bat.Collision(borders.get(0)) && !bat.Collision(borders.get(2))) {
 			batOldX = bat.getX();
-			
+
 		}else {
 
 			if(bat.getX() > Const.WINDOWWIDTH / 2) {
